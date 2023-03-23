@@ -1,0 +1,13 @@
+//공통적인 UI
+@mixin button($wid: 100px, $bg: red) {
+  display: block;
+  width: $wid;
+  height: 34px;
+  border-radius: 20px;
+  background-color: $bg;
+  font-size: 12px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

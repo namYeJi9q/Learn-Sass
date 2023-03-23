@@ -1,0 +1,114 @@
+@charset "UTF-8";
+@import "reset";
+@import "mixin";
+
+$bgBody: #eee;
+$bgItem: lightcyan;
+$colorH2: #333;
+$colorP: #777;
+$bgBtn: pink;
+$interval: 0.1s;
+$bgs: (hotpink, aqua, orange, lightGreen);
+
+body {
+  background-color: $bgBody;
+}
+
+.wrap {
+  width: 100%;
+  border: 2px solid #bbb;
+  padding: 100px;
+  display: flex;
+  justify-content: center;
+  perspective: 600px;
+
+  .item {
+    width: 300px;
+    padding: 30px;
+    background-color: $bgItem;
+    margin: 50px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+    transition: 0.5s;
+    transform: translateY(100px) rotateY(100deg);
+    opacity: 0;
+    h2 {
+      font-size: 30px;
+      font-family: "arial";
+      color: $colorH2;
+      margin-bottom: 15px;
+    }
+    p {
+      font-size: 14px;
+      line-height: 1.3;
+      font-family: "arial";
+      color: $colorP;
+      margin-bottom: 20px;
+    }
+
+    //for 반복문
+    // @for $i from 1 through 4 {
+    //   &:nth-of-type(#{$i}) {
+    //     transition-delay: $interval * $i;
+    //   }
+    // }
+
+    // each 반복문
+    @each $el in $bgs {
+      $num: index($bgs, $el);
+      &:nth-of-type(#{$num}) {
+        transition-delay: $interval * $num;
+        a {
+          @include button($bg: $el);
+        }
+      }
+    }
+
+    /*
+    &:nth-of-type(1) {
+      a {
+        @include button($bg: hotpink);
+      }
+    }
+    &:nth-of-type(2) {
+      a {
+        @include button($bg: aqua);
+      }
+    }
+    &:nth-of-type(3) {
+      a {
+        @include button($bg: orange);
+      }
+    }
+    &:nth-of-type(4) {
+      a {
+        @include button($bg: lightGreen);
+      }
+    }
+    */
+
+    //호버시 모션처리
+    &:hover {
+      //내가 item요소에 hover했을 때
+      background-color: #111;
+
+      h2 {
+        color: #fff;
+      }
+      p {
+        color: #fff;
+      }
+      a {
+        background-color: yellow;
+        color: $colorH2;
+      }
+    }
+  }
+
+  &:hover {
+    .item {
+      transform: translateY(0px) rotateY(0deg);
+      opacity: 1;
+    }
+  }
+}
